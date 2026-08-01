@@ -28,3 +28,67 @@ def count_frequencies(text):
             frequencies[character] = 1
 
     return frequencies
+
+
+def remove_smallest_node(nodes):
+    # Find and remove the lowest-priority node.
+    smallest_index = 0
+
+    for index in range(1, len(nodes)):
+        current_node = nodes[index]
+        smallest_node = nodes[smallest_index]
+
+        # A lower frequency receives higher priority.
+        if current_node.frequency < smallest_node.frequency:
+            smallest_index = index
+
+        # Use earlier order as a tiebreaker when frequencies are equal.
+        elif current_node.frequency == smallest_node.frequency:
+            if current_node.order < smallest_node.order:
+                smallest_index = index
+
+    return nodes.pop(smallest_index)
+
+
+def build_huffman_tree(frequencies):
+    # Build the Huffman tree and record every greedy combination.
+    nodes = []
+    combine_steps = []
+    next_order = 0
+
+    # Create one leaf node for every unique character.
+    for character in frequencies:
+        nodes.append(
+            Node(
+                character=character,
+                frequency=frequencies[character],
+                order=next_order,
+            )
+        )
+        next_order += 1
+
+    if len(nodes) == 0:
+        return None, combine_steps
+
+    # Continue until all nodes have been combined into one root.
+    while len(nodes) > 1:
+        # Greedy choice: remove the two currently lowest-frequency nodes.
+        left_node = remove_smallest_node(nodes)
+        right_node = remove_smallest_node(nodes)
+
+        parent_node = Node(
+            character=None,
+            frequency=left_node.frequency + right_node.frequency,
+            order=next_order,
+            left=left_node,
+            right=right_node,
+        )
+        next_order += 1
+
+        # Record this step for the console output and report screenshots.
+        combine_steps.append((left_node, right_node, parent_node))
+
+        # The combined parent becomes available for the next greedy step.
+        nodes.append(parent_node)
+
+    return nodes[0], combine_steps
