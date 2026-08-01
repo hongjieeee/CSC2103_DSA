@@ -167,3 +167,77 @@ def decode_text(encoded_text, root):
         raise ValueError("Encoded text ends with an incomplete Huffman code.")
 
     return decoded_text
+
+
+def display_character(character):
+    # make space readable in the console output
+    if character == " ":
+        return "[space]"
+
+    return character
+
+
+def display_results(text, frequencies, codes, encoded_text, decoded_text):
+    # Display the code table, encoded result, and validation.
+    print("\nRESULT")
+    print("=" * 50)
+
+    print("{:<18} {:<12} {}".format("Character", "Frequency", "Code"))
+
+    print("-" * 50)
+
+    for character in frequencies:
+        print(
+            "{:<18} {:<12} {}".format(
+                display_character(character), frequencies[character], codes[character]
+            )
+        )
+
+    original_bits = len(text.encode("utf-8")) * 8
+    encoded_bits = len(encoded_text)
+
+    print("-" * 50)
+    print("Original text       :", text)
+    print("Encoded bit string  :", encoded_text)
+    print("Decoded text        :", decoded_text)
+
+    if decoded_text == text:
+        print("Validation          : PASS")
+    else:
+        print("Validation          : FAIL")
+
+    print("Original UTF-8 size :", original_bits, "bits")
+    print("Encoded data size   :", encoded_bits, "bits")
+
+    if original_bits > 0:
+        saving_percentage = ((original_bits - encoded_bits) * 100) / original_bits
+
+        print("Data-bit saving     : {:.2f}%".format(saving_percentage))
+
+
+def main():
+    print("=" * 50)
+    print("HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)")
+    print("=" * 50)
+
+    text = input("Enter text to encode: ")
+
+    if text == "":
+        print("Error: input cannot be empty.")
+        return
+
+    frequencies = count_frequencies(text)
+
+    tree, combine_steps = build_huffman_tree(frequencies)
+
+    codes = build_codes(tree)
+
+    encoded_text = encode_text(text, codes)
+
+    decoded_text = decode_text(encoded_text, tree)
+
+    display_results(text, frequencies, codes, encoded_text, decoded_text)
+
+
+if __name__ == "__main__":
+    main()
