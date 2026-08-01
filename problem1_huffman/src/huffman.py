@@ -6,12 +6,6 @@ class Node:
         self.left = left
         self.right = right
 
-        # Store all symbols contained inside this subtree.
-        if character is not None:
-            self.symbols = [character]
-        else:
-            self.symbols = left.symbols + right.symbols
-
     def is_leaf(self):
         # Return True when this node represents an original character.
         return self.left is None and self.right is None
@@ -51,24 +45,20 @@ def remove_smallest_node(nodes):
 
 
 def build_huffman_tree(frequencies):
-    # Build the Huffman tree and record every greedy combination.
     nodes = []
-    combine_steps = []
     next_order = 0
 
     # Create one leaf node for every unique character.
     for character in frequencies:
         nodes.append(
             Node(
-                character=character,
-                frequency=frequencies[character],
-                order=next_order,
+                character=character, frequency=frequencies[character], order=next_order
             )
         )
         next_order += 1
 
     if len(nodes) == 0:
-        return None, combine_steps
+        return None
 
     # Continue until all nodes have been combined into one root.
     while len(nodes) > 1:
@@ -85,13 +75,10 @@ def build_huffman_tree(frequencies):
         )
         next_order += 1
 
-        # Record this step for the console output and report screenshots.
-        combine_steps.append((left_node, right_node, parent_node))
-
         # The combined parent becomes available for the next greedy step.
         nodes.append(parent_node)
 
-    return nodes[0], combine_steps
+    return nodes[0]
 
 
 def build_codes(node, current_code="", codes=None):
@@ -228,7 +215,7 @@ def main():
 
     frequencies = count_frequencies(text)
 
-    tree, combine_steps = build_huffman_tree(frequencies)
+    tree = build_huffman_tree(frequencies)
 
     codes = build_codes(tree)
 
