@@ -128,3 +128,42 @@ def encode_text(text, codes):
         encoded_text += codes[character]
 
     return encoded_text
+
+
+def decode_text(encoded_text, root):
+    # Decode a Huffman bit string by traversing the tree.
+    if root is None:
+        return ""
+
+    # If the input contains only one unique character.
+    if root.is_leaf():
+        for bit in encoded_text:
+            if bit != "0":
+                raise ValueError("A single character Huffman tree only accepts code 0.")
+
+        return root.character * len(encoded_text)
+
+    decoded_text = ""
+    current_node = root
+
+    for bit in encoded_text:
+        if bit == "0":
+            current_node = current_node.left
+
+        elif bit == "1":
+            current_node = current_node.right
+
+        else:
+            raise ValueError("Encoded text must contain only 0 and 1.")
+
+        if current_node is None:
+            raise ValueError("The encoded text does not match the Huffman tree.")
+
+        if current_node.is_leaf():
+            decoded_text += current_node.character
+            current_node = root
+
+    if current_node is not root:
+        raise ValueError("Encoded text ends with an incomplete Huffman code.")
+
+    return decoded_text
