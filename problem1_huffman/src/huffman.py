@@ -92,3 +92,39 @@ def build_huffman_tree(frequencies):
         nodes.append(parent_node)
 
     return nodes[0], combine_steps
+
+
+def build_codes(node, current_code="", codes=None):
+    # Traverse the Huffman tree recursively and assign binary codes.
+    if codes is None:
+        codes = {}
+
+    if node is None:
+        return codes
+
+    if node.is_leaf():
+        # A one character input still requires a usable binary code.
+        if current_code == "":
+            codes[node.character] = "0"
+        else:
+            codes[node.character] = current_code
+
+        return codes
+
+    # Left edge represents 0.
+    build_codes(node.left, current_code + "0", codes)
+
+    # Right edge represents 1.
+    build_codes(node.right, current_code + "1", codes)
+
+    return codes
+
+
+def encode_text(text, codes):
+    # Replace each original character with its Huffman code.
+    encoded_text = ""
+
+    for character in text:
+        encoded_text += codes[character]
+
+    return encoded_text
