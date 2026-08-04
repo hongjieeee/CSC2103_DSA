@@ -74,7 +74,7 @@ def main():
     print("  0/1 Knapsack Solver")
     print("=" * 40)
 
-    capacity = ask_int("\nPlease add capacity: ", minimum=1)
+    capacity = ask_int("\nPlease add capacity: ", minimum=0)
 
     values = []
     weights = []
