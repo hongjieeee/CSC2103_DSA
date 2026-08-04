@@ -2,19 +2,11 @@
 
 ## Overview
 
-This console-based program implements the Huffman Coding algorithm using a greedy approach. It accepts a text string, counts the frequency of each character, constructs a Huffman tree, generates prefix-free binary codes, and encodes the original text.
-
-The program also decodes the encoded bit string to verify that the original text can be recovered correctly.
+For Greedy Algorithm category, Huffman Coding was selected because it is a lossless compression algorithm that able to assign the shorter binary codes to characters with high frequencies and longer binary code to less frequent characters. The program will count the character frequencies, builds a Huffman tree and encodes the user input. It also decodes the result to check whether the original text can be recovered correctly or not.
 
 ## Greedy Strategy
 
-At each stage, the algorithm selects the two available nodes with the lowest frequencies. These nodes become the left and right children of a newly created parent node.
-
-The frequency of the parent node is calculated as the sum of the two selected frequencies. The parent node is then returned to the available node list.
-
-This process continues until only one node remains, which becomes the root of the Huffman tree.
-
-The minimum-frequency nodes are selected through a manual linear scan. Built-in sorting and priority-queue libraries are not used for the core algorithm.
+For the greedy algorithm problem, our group had selected Huffman Coding. Huffman Coding is a lossless compression algorithm that will convert characters into binary codes based on their frequencies. The main workflow for this algorithm is that the characters that appear more often will receive a shorter binary code and the characters that appear less often will receive a longer binary code. By using this algorithm, the total number of bits that required to represent the text can be reduced Our program will prompt user to enter a text string. It first counts how many times each character appears. After that, a Huffman tree will be build and binary codes is generated for every unique character. The original text is then encoded by replacing each character with the Huffman code. A decoding function was also included in the program as it helps to verify the result. The correct result is prove by the decoding text is the same as the original input.
 
 ## Features
 
@@ -40,14 +32,11 @@ The minimum-frequency nodes are selected through a manual linear scan. Built-in 
 ```text
 problem1_huffman/
 ├── problem1_huffman.py
-├── test_huffman.py
 ├── README.md
 └── samples/
     ├── sample_input.txt
     └── sample_output.txt
 ```
-
-`test_huffman.py` contains the automated tests and may be maintained by the testing and verification team member.
 
 ## Running the Program
 
@@ -63,14 +52,6 @@ Example:
 
 ```text
 Enter text to encode: banana
-```
-
-## Running the Tests
-
-Open a terminal in the `problem1_huffman` folder and run:
-
-```bash
-python3 test_huffman.py
 ```
 
 ## Program Output
