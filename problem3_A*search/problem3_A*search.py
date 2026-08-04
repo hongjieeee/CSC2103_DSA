@@ -21,7 +21,7 @@ def Heuristic(a, b):
 
     return ((a.a - b.a)**2 + (a.b - b.b)**2)**0.5
 
-def check_valid_positive_integer(value):
+def Check_valid_positive_integer(value):
 
     if value <= 0:
         print("\nvalue cannot be 0 or less\n")
@@ -30,7 +30,7 @@ def check_valid_positive_integer(value):
     else:
         return True
 
-def check_start_dest_blocked(start, end):
+def Check_start_dest_blocked(start, end):
 
     if start.blocked:
         print("start cell is blocked")
@@ -45,7 +45,7 @@ def check_start_dest_blocked(start, end):
 
 def Create_path(start_cell, current):
 
-    # construct a path from a lot of cells in the closed list
+    # construct a path from the cells in the closed list
     path = []
     while current.pa != -1 and current.pb != -1:
         path.append((current.a, current.b))
@@ -53,8 +53,58 @@ def Create_path(start_cell, current):
 
     path.append((start_cell.a, start_cell.b))
     path.reverse()
+
+    # show path movement on grid
+    col_header = " ".join(str(c) for c in range(cols))
+    print(f"column: {col_header}")
+    print("-" * len(col_header))
+
+    path_set = set(path)
+
+    # replaces path walked with symbol x
+    for r in range(rows):
+        row_display = []
+        for c in range(cols):
+            # Check if this cell coordinate is part of the path
+            if (r, c) in path_set:
+                row_display.append("X")
+            elif cells[r][c].blocked:
+                row_display.append("0")  # Wall
+            else:
+                row_display.append("1")  # Open path
+
+        row_str = " ".join(row_display)
+        print(f"row {r}:  {row_str}")
+    
     print("Path:" + " --> ".join(str(p) for p in path))
     return
+
+def failed_path(closed_list):
+
+    col_header = " ".join(str(c) for c in range(cols))
+    print(f"column: {col_header}")
+    print("-" * (len(col_header) + 10))
+
+    path_set = set(closed_list)
+
+    # replaces path walked with symbol x
+    for r in range(rows):
+        row_display = []
+        for c in range(cols):
+            # Check if this cell coordinate is part of the path
+            if (r, c) in path_set:
+                row_display.append("X")
+            elif cells[r][c].blocked:
+                row_display.append("0")  # Wall
+            else:
+                row_display.append("1")  # Open path
+
+        row_str = " ".join(row_display)
+        print(f"row {r}:  {row_str}")
+
+    print("there is no valid path from start to destination")
+    return
+
 
 # main function
 def A_star():
@@ -62,7 +112,7 @@ def A_star():
     start_cell = cells[start[0]][start[1]]
     end_cell = cells[dest[0]][dest[1]]
 
-    if check_start_dest_blocked(start_cell, end_cell):
+    if Check_start_dest_blocked(start_cell, end_cell):
         return
             
     # initialize lists
@@ -80,7 +130,7 @@ def A_star():
     # loop till reach destination if there is valid path
     while open_list:
 
-        # Manually find the cell with the lowest 'f' cost
+        # find the cell with the lowest 'f' cost
         current = open_list[0]
         current_index = 0
         
@@ -105,7 +155,7 @@ def A_star():
             Create_path(start_cell, end_cell)
             break
 
-        # check neighbours
+        # neighbour directions
         directions = [
             # 4 directions
             (-1,0),(1,0),(0,-1),(0,1)
@@ -145,7 +195,9 @@ def A_star():
                 open_list.append(neighbour)
 
     # when no more items in open list
-    print("there is no valid path from start to destination")
+    if not open_list:
+        failed_path(closed_list)
+        
 
 # Program start
 # Get grid dimensions from user
@@ -154,14 +206,14 @@ while True:
 
     rows = int(input("Enter number of rows: "))
 
-    if check_valid_positive_integer(rows) == True:
+    if Check_valid_positive_integer(rows) == True:
         break
 
 while True:
 
     cols = int(input("Enter number of columns: "))
 
-    if check_valid_positive_integer(cols) == True:
+    if Check_valid_positive_integer(cols) == True:
         break
 
 
@@ -177,7 +229,7 @@ for r in range(rows):
         row_input = list(map(int, input(f"Row {r}: ").strip().split()))
         
         if len(row_input) == cols:
-            # val == 0 = true, means cell is blocked
+            # val == 0 = True, means cell is blocked
             row_cells = [cell(r, c, blocked=(val == 0)) for c, val in enumerate(row_input)]
             cells.append(row_cells)
             break
@@ -185,16 +237,14 @@ for r in range(rows):
             print(f"Error: Please enter exactly {cols} numbers.")
 
 # Get start and destination coordinates
-
 while True:
-
     print("\nEnter coordinates separated by a space (e.g., 0 2)")
+    print("*rows and columns start from 0")
     start_r, start_c = map(int, input("Enter Start cell (row col): ").split())
     start = [start_r, start_c]
 
     # only accepts valid integer inputs
     if start_r < 0 or start_r >= rows or start_c < 0 or start_c >= cols:
-
         print(f"Error: Please enter a valid coordinate")
 
     elif (cells[start_r][start_c]).blocked == True:
@@ -204,7 +254,6 @@ while True:
         break
 
 while True:
-
     dest_r, dest_c = map(int, input("Enter Destination cell (row col): ").split())
 
     # only accepts valid integer inputs
@@ -218,3 +267,4 @@ while True:
 # Run the algorithm
 print("\nCalculating path...\n")
 A_star()
+
