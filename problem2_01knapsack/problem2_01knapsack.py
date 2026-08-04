@@ -82,11 +82,12 @@ def main():
 
     while True:
         print(f"\n--- Item {item_number} ---")
-        weight = ask_int("Please add weight: ", minimum=1)
         value = ask_int("Please add value: ", minimum=0)
+        weight = ask_int("Please add weight: ", minimum=1)
 
-        weights.append(weight)
+        
         values.append(value)
+        weights.append(weight)
         item_number += 1
 
         if not ask_yes_no("\nDo you want to add another item? (y/n): "):
@@ -97,11 +98,12 @@ def main():
     chosen = find_chosen_items(tab, capacity, weights)
 
     
-    print_table(tab)
-
     print("\n" + "=" * 40)
-    print("  Results")
+    print("Results")
     print("=" * 40)
+    print("DP Table")
+    print_table(tab)
+    print("\n" * 3)
     print(f"Capacity: {capacity}")
     print(f"Items entered: {len(values)}")
 
