@@ -103,7 +103,7 @@ def main():
     print("=" * 40)
     print("DP Table")
     print_table(tab)
-    print("\n" * 3)
+    print()
     print(f"Capacity: {capacity}")
     print(f"Items entered: {len(values)}")
 
