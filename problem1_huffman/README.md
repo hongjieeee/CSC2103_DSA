@@ -4,9 +4,13 @@
 
 For Greedy Algorithm category, Huffman Coding was selected because it is a lossless compression algorithm that able to assign the shorter binary codes to characters with high frequencies and longer binary code to less frequent characters. The program will count the character frequencies, builds a Huffman tree and encodes the user input. It also decodes the result to check whether the original text can be recovered correctly or not.
 
+---
+
 ## Greedy Strategy
 
 For the greedy algorithm problem, our group had selected Huffman Coding. Huffman Coding is a lossless compression algorithm that will convert characters into binary codes based on their frequencies. The main workflow for this algorithm is that the characters that appear more often will receive a shorter binary code and the characters that appear less often will receive a longer binary code. By using this algorithm, the total number of bits that required to represent the text can be reduced Our program will prompt user to enter a text string. It first counts how many times each character appears. After that, a Huffman tree will be build and binary codes is generated for every unique character. The original text is then encoded by replacing each character with the Huffman code. A decoding function was also included in the program as it helps to verify the result. The correct result is prove by the decoding text is the same as the original input.
+
+---
 
 ## Features
 
@@ -22,10 +26,14 @@ For the greedy algorithm problem, our group had selected Huffman Coding. Huffman
 - Handles spaces and single-character inputs
 - Rejects empty input
 
+---
+
 ## Requirements
 
 - Python 3
 - No external Python libraries are required
+
+---
 
 ## Project Files
 
@@ -38,6 +46,8 @@ problem1_huffman/
     └── sample_output.txt
 ```
 
+---
+
 ## Running the Program
 
 Open a terminal in the `problem1_huffman` folder and run:
@@ -48,11 +58,13 @@ python3 problem1_huffman.py
 
 Enter a non-empty text string when prompted.
 
-Example:
+### Example
 
 ```text
 Enter text to encode: banana
 ```
+
+---
 
 ## Program Output
 
@@ -69,6 +81,8 @@ The program displays:
 9. Encoded data size
 10. Estimated data-bit saving
 
+---
+
 ## Validation
 
 The main correctness check uses round-trip validation:
@@ -79,16 +93,24 @@ Original text → Encode → Decode → Compare with original
 
 The implementation passes validation when the decoded text is exactly equal to the original input.
 
-## Example Test Cases
+---
 
-TODO:
+# Example Test Cases
 
-## testing normal strings (words)
+## Test Case 1: Testing Normal Strings (Words)
+
+### Input
+
+```text
 ==================================================
 HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
 ==================================================
 Enter text to encode: banana
+```
 
+### Output
+
+```text
 RESULT
 ==================================================
 Character          Frequency    Code
@@ -104,14 +126,24 @@ Validation          : PASS
 Original UTF-8 size : 48 bits
 Encoded data size   : 9 bits
 Data-bit saving     : 81.25%
+```
 
+---
 
-## testing upper case and lower case alphabets
+## Test Case 2: Testing Upper Case and Lower Case Alphabets
+
+### Input
+
+```text
 =================================================
 HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
 ==================================================
 Enter text to encode: AaAaAa
+```
 
+### Output
+
+```text
 RESULT
 ==================================================
 Character          Frequency    Code
@@ -126,14 +158,24 @@ Validation          : PASS
 Original UTF-8 size : 48 bits
 Encoded data size   : 6 bits
 Data-bit saving     : 87.50%
+```
 
+---
 
-## testing numbers only
+## Test Case 3: Testing Numbers Only
+
+### Input
+
+```text
 ==================================================
 HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
 ==================================================
 Enter text to encode: 123341233123
+```
 
+### Output
+
+```text
 RESULT
 ==================================================
 Character          Frequency    Code
@@ -150,13 +192,24 @@ Validation          : PASS
 Original UTF-8 size : 96 bits
 Encoded data size   : 23 bits
 Data-bit saving     : 76.04%
+```
 
-## Numbers and Special character 
+---
+
+## Test Case 4: Numbers and Special Character
+
+### Input
+
+```text
 ==================================================
 HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
 ==================================================
 Enter text to encode: 123341233123$
+```
 
+### Output
+
+```text
 RESULT
 ==================================================
 Character          Frequency    Code
@@ -174,25 +227,35 @@ Validation          : PASS
 Original UTF-8 size : 104 bits
 Encoded data size   : 28 bits
 Data-bit saving     : 73.08%
+```
 
+---
 
-## just 1 empty space (or empty string)
+## Test Case 5: Just 1 Empty Space (or Empty String)
 
+### Input
+
+```text
 ==================================================
 HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
 ==================================================
-Enter text to encode:  
+Enter text to encode:
+```
 
+### Output
+
+```text
 RESULT
 ==================================================
 Character          Frequency    Code
 --------------------------------------------------
 [space]            1            0
 --------------------------------------------------
-Original text       :  
+Original text       :
 Encoded bit string  : 0
-Decoded text        :  
+Decoded text        :
 Validation          : PASS
 Original UTF-8 size : 8 bits
 Encoded data size   : 1 bits
 Data-bit saving     : 87.50%
+```
