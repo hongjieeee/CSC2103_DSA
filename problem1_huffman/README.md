@@ -259,3 +259,42 @@ Original UTF-8 size : 8 bits
 Encoded data size   : 1 bits
 Data-bit saving     : 87.50%
 ```
+---
+
+## Test Case 6: Full Capability Testing
+
+### Input
+
+```text
+==================================================
+HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
+==================================================
+Enter text to encode: aaaaaaaaaabbbbbcccd A! 321
+```
+
+## Output
+
+```text
+RESULT
+==================================================
+Character          Frequency    Code
+--------------------------------------------------
+a                  10           0
+b                  5            111
+c                  3            100
+d                  1            10110
+[space]            2            1010
+A                  1            10111
+!                  1            11000
+3                  1            11001
+2                  1            11010
+1                  1            11011
+--------------------------------------------------
+Original text       : aaaaaaaaaabbbbbcccd A! 321
+Encoded bit string  : 000000000011111111111111110010010010110101010111110001010110011101011011
+Decoded text        : aaaaaaaaaabbbbbcccd A! 321
+Validation          : PASS
+Original UTF-8 size : 208 bits
+Encoded data size   : 72 bits
+Data-bit saving     : 65.38%
+```
