@@ -82,3 +82,117 @@ The implementation passes validation when the decoded text is exactly equal to t
 ## Example Test Cases
 
 TODO:
+
+## testing normal strings (words)
+==================================================
+HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
+==================================================
+Enter text to encode: banana
+
+RESULT
+==================================================
+Character          Frequency    Code
+--------------------------------------------------
+b                  1            10
+a                  3            0
+n                  2            11
+--------------------------------------------------
+Original text       : banana
+Encoded bit string  : 100110110
+Decoded text        : banana
+Validation          : PASS
+Original UTF-8 size : 48 bits
+Encoded data size   : 9 bits
+Data-bit saving     : 81.25%
+
+
+## testing upper case and lower case alphabets
+=================================================
+HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
+==================================================
+Enter text to encode: AaAaAa
+
+RESULT
+==================================================
+Character          Frequency    Code
+--------------------------------------------------
+A                  3            0
+a                  3            1
+--------------------------------------------------
+Original text       : AaAaAa
+Encoded bit string  : 010101
+Decoded text        : AaAaAa
+Validation          : PASS
+Original UTF-8 size : 48 bits
+Encoded data size   : 6 bits
+Data-bit saving     : 87.50%
+
+
+## testing numbers only
+==================================================
+HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
+==================================================
+Enter text to encode: 123341233123
+
+RESULT
+==================================================
+Character          Frequency    Code
+--------------------------------------------------
+1                  3            111
+2                  3            10
+3                  5            0
+4                  1            110
+--------------------------------------------------
+Original text       : 123341233123
+Encoded bit string  : 11110001101111000111100
+Decoded text        : 123341233123
+Validation          : PASS
+Original UTF-8 size : 96 bits
+Encoded data size   : 23 bits
+Data-bit saving     : 76.04%
+
+## Numbers and Special character 
+==================================================
+HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
+==================================================
+Enter text to encode: 123341233123$
+
+RESULT
+==================================================
+Character          Frequency    Code
+--------------------------------------------------
+1                  3            01
+2                  3            10
+3                  5            11
+4                  1            000
+$                  1            001
+--------------------------------------------------
+Original text       : 123341233123$
+Encoded bit string  : 0110111100001101111011011001
+Decoded text        : 123341233123$
+Validation          : PASS
+Original UTF-8 size : 104 bits
+Encoded data size   : 28 bits
+Data-bit saving     : 73.08%
+
+
+## just 1 empty space (or empty string)
+
+==================================================
+HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
+==================================================
+Enter text to encode:  
+
+RESULT
+==================================================
+Character          Frequency    Code
+--------------------------------------------------
+[space]            1            0
+--------------------------------------------------
+Original text       :  
+Encoded bit string  : 0
+Decoded text        :  
+Validation          : PASS
+Original UTF-8 size : 8 bits
+Encoded data size   : 1 bits
+Data-bit saving     : 87.50%

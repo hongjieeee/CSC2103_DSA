@@ -37,7 +37,7 @@ def encode_and_decode(text):
     return frequencies, tree, codes, encoded_text, decoded_text
 
 
-def trest_frequency_counting():
+def test_frequency_counting():
     actual = count_frequencies
     expected = {
         "b": 1,
@@ -63,7 +63,7 @@ def test_text_with_space():
 
     check_result("Space receives a Huffman code",True,"" in codes)
 
-def test_single_char():
+def test_single_character():
     text="aaaaa"
     frequencies, tree, codes, encoded_text, decoded_text = (encode_and_decode(text))
 
@@ -150,10 +150,10 @@ def run_tests():
     print("\n" + "=" * 55)
     print("TEST SUMMARY")
     print("=" * 55)
-    print("Passed:", passed)
-    print("Failed:", failed)
+    print("Passed:", check_pass)
+    print("Failed:", check_fail)
 
-    if failed == 0:
+    if check_fail == 0:
         print("Overall result: ALL TESTS PASSED")
     else:
         print("Overall result: SOME TESTS FAILED")
