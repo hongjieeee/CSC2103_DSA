@@ -32,20 +32,17 @@ The 0/1 Knapsack problem asks: given a set of items, each with a value and a wei
 ## Project Files
 
 ```text
-problem2_knapsack/
-├── problem2_knapsack.py
-├── README.md
-└── samples/
-    ├── sample_input.txt
-    └── sample_output.txt
+problem2_01knapsack/
+├── problem2_01knapsack.py
+└── README.md
 ```
 
 ## Running the Program
 
-Open a terminal in the `problem2_knapsack` folder and run:
+Open a terminal in the `problem2_01knapsack` folder and run:
 
 ```bash
-python3 problem2_knapsack.py
+python3 problem2_01knapsack.py
 ```
 
 You will first be prompted for the knapsack capacity, then for each item's value and weight. After each item, you'll be asked whether you want to add another one.
