@@ -140,6 +140,8 @@ Weight used: 10 / 10
 Maximum value in Knapsack = 1200
 ```
 
+The program checks several possible item combinations and selects Item 1, Item 3, and Item 4 because they give the maximum value of 1200 without exceeding the capacity of 10.
+
 ### Test Case 2: Exact Fit Case
 
 **Input**
@@ -193,7 +195,7 @@ Maximum value in Knapsack = 60
 
 Every item's weight adds up to exactly the capacity (1 + 2 + 3 = 6), so all three items are taken and the knapsack is filled completely.
 
-### Test Case 3: Zero Capacity Edge Case
+### Test Case 3: Zero-Capacity Edge Case
 
 **Input**
 
@@ -240,3 +242,103 @@ Maximum value in Knapsack = 0
 ```
 
 With a capacity of 0, no item (all of which have a weight of at least 1) can ever be added, so the maximum value is 0.
+
+### Test Case 4: Small Capacity Case
+
+**Input**
+
+```text
+Please add capacity: 1
+
+--- Item 1 ---
+Please add value: 300
+Please add weight: 2
+
+Do you want to add another item? (y/n): y
+
+--- Item 2 ---
+Please add value: 200
+Please add weight: 3
+
+Do you want to add another item? (y/n): y
+
+--- Item 3 ---
+Please add value: 400
+Please add weight: 4
+
+Do you want to add another item? (y/n): n
+```
+
+**Output**
+
+```text
+========================================
+Results
+========================================
+DP Table
+       0  1
+i=0    0  0
+i=1    0  0
+i=2    0  0
+i=3    0  0
+
+Capacity: 1
+Items entered: 3
+
+No items fit in the knapsack.
+Maximum value in Knapsack = 0
+```
+
+With a capacity of 1, every item's weight is greater than the knapsack capacity, so no item can be selected and the maximum value is 0.
+
+### Test Case 5: Classic Optimal-Combination Case
+
+**Input**
+
+```text
+Please add capacity: 50
+
+--- Item 1 ---
+Please add value: 60
+Please add weight: 10
+
+Do you want to add another item? (y/n): y
+
+--- Item 2 ---
+Please add value: 100
+Please add weight: 20
+
+Do you want to add another item? (y/n): y
+
+--- Item 3 ---
+Please add value: 120
+Please add weight: 30
+
+Do you want to add another item? (y/n): n
+```
+
+**Output**
+
+```text
+========================================
+Results
+========================================
+DP Table
+         0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   32   33   34   35   36   37   38   39   40   41   42   43   44   45   46   47   48   49   50
+i=0      0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
+i=1      0    0    0    0    0    0    0    0    0    0   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60   60
+i=2      0    0    0    0    0    0    0    0    0    0   60   60   60   60   60   60   60   60   60   60  100  100  100  100  100  100  100  100  100  100  160  160  160  160  160  160  160  160  160  160  160  160  160  160  160  160  160  160  160  160  160
+i=3      0    0    0    0    0    0    0    0    0    0   60   60   60   60   60   60   60   60   60   60  100  100  100  100  100  100  100  100  100  100  160  160  160  160  160  160  160  160  160  160  180  180  180  180  180  180  180  180  180  180  220
+
+Capacity: 50
+Items entered: 3
+
+Items to take:
+  Item 2: weight=20, value=100
+  Item 3: weight=30, value=120
+
+Weight used: 50 / 50
+Maximum value in Knapsack = 220
+```
+
+The program selects Item 2 and Item 3 because their combined value of 220 is the best possible result within the capacity of 50.
