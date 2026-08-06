@@ -14,7 +14,7 @@ check_fail = 0
 def check_result(test_name, expected, actual):
 
     global check_pass #globals are used so that the variables can be accessed throughout the files.
-    global check_failed
+    global check_fail
 
     print("\nTest : ", test_name)
     print("Expected : ", expected)
@@ -133,6 +133,73 @@ def test_invalid_bit():
         error_detected
     )
 
+def test_huffman_capabilities():
+    text = "aaaaaaaaaabbbbbcccd A!"
+
+    frequencies, tree, codes, encoded_text, decoded_text = (
+        encode_and_decode(text)
+    )
+
+    # Check the complete encode-decode process.
+    check_result(
+        "Capability test round-trip",
+        text,
+        decoded_text
+    )
+
+    # Check the expected frequencies.
+    expected_frequencies = {
+        "a": 10,
+        "b": 5,
+        "c": 3,
+        "d": 1,
+        " ": 1,
+        "A": 1,
+        "!": 1
+    }
+
+    check_result(
+        "Capability test frequency counting",
+        expected_frequencies,
+        frequencies
+    )
+
+    # Frequent characters should receive shorter codes.
+    greedy_behavior = (
+        len(codes["a"]) < len(codes["b"])
+        and len(codes["b"]) < len(codes["c"])
+        and len(codes["c"]) < len(codes["d"])
+    )
+
+    check_result(
+        "Frequent characters receive shorter codes",
+        True,
+        greedy_behavior
+    )
+
+    # Check that spaces are supported.
+    check_result(
+        "Space receives a Huffman code",
+        True,
+        " " in codes
+    )
+
+    # Check that uppercase and lowercase are different.
+    check_result(
+        "Uppercase and lowercase are separate",
+        True,
+        "a" in codes and "A" in codes
+    )
+
+    # Check whether compression occurred.
+    original_bits = len(text.encode("utf-8")) * 8
+    compression_achieved = len(encoded_text) < original_bits
+
+    check_result(
+        "Encoded data is smaller than original data",
+        True,
+        compression_achieved
+    )
 
 def run_tests():
     print("=" * 55)
@@ -146,6 +213,7 @@ def run_tests():
     test_uppercase_and_lowercase()
     test_prefix_free_codes()
     test_invalid_bit()
+    test_huffman_capabilities()
 
     print("\n" + "=" * 55)
     print("TEST SUMMARY")
