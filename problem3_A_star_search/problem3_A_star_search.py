@@ -30,19 +30,6 @@ def Check_valid_positive_integer(value):
     else:
         return True
 
-def Check_start_dest_blocked(start, end):
-
-    if start.blocked:
-        print("start cell is blocked")
-        return True
-
-    elif end.blocked:
-        print("end cell is blocked")
-        return True
-
-    else:
-        return False
-
 def Create_path(start_cell, current):
 
     # construct a path from the cells in the closed list
@@ -57,7 +44,7 @@ def Create_path(start_cell, current):
     # show path movement on grid
     col_header = " ".join(str(c) for c in range(cols))
     print(f"column: {col_header}")
-    print("-" * len(col_header))
+    print("-" * (len(col_header) + 10))
 
     path_set = set(path)
 
@@ -105,15 +92,11 @@ def failed_path(closed_list):
     print("there is no valid path from start to destination")
     return
 
-
 # main function
 def A_star():
 
     start_cell = cells[start[0]][start[1]]
     end_cell = cells[dest[0]][dest[1]]
-
-    if Check_start_dest_blocked(start_cell, end_cell):
-        return
             
     # initialize lists
     open_list = []
@@ -153,7 +136,7 @@ def A_star():
         if current.a == end_cell.a and current.b == end_cell.b:
             print("Found!")
             Create_path(start_cell, end_cell)
-            break
+            return
 
         # neighbour directions
         directions = [
@@ -216,8 +199,6 @@ while True:
     if Check_valid_positive_integer(cols) == True:
         break
 
-
-
 # show grid layout (1 for unblocked, 0 for blocked)
 print(f"\nEnter the grid row by row (use spaces between numbers, 1 for open path, 0 for wall).")
 print(f"Example of row: 1 1 0 1 ...")
@@ -240,15 +221,15 @@ for r in range(rows):
 while True:
     print("\nEnter coordinates separated by a space (e.g., 0 2)")
     print("*rows and columns start from 0")
-    start_r, start_c = map(int, input("Enter Start cell (row col): ").split())
+    start_r, start_c = map(int, input("\nEnter Start cell (row col): ").split())
     start = [start_r, start_c]
 
     # only accepts valid integer inputs
     if start_r < 0 or start_r >= rows or start_c < 0 or start_c >= cols:
-        print(f"Error: Please enter a valid coordinate")
+        print(f"\nError: Please enter a valid coordinate")
 
     elif (cells[start_r][start_c]).blocked == True:
-        print(f"Error: Please enter a coordinate that is not blocked")
+        print(f"\nError: Please enter a coordinate that is not blocked")
 
     else:
         break
@@ -258,7 +239,10 @@ while True:
 
     # only accepts valid integer inputs
     if dest_r < 0 or dest_r >= rows or dest_c < 0 or dest_c >= cols:
-        print(f"Error: Please enter a valid coordinate")
+        print(f"\nError: Please enter a valid coordinate")
+
+    elif (cells[dest_r][dest_c]).blocked == True:
+            print(f"\nError: Please enter a coordinate that is not blocked")
 
     else:
         dest = [dest_r, dest_c]
