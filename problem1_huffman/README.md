@@ -41,9 +41,6 @@ For the greedy algorithm problem, our group had selected Huffman Coding. Huffman
 problem1_huffman/
 ├── problem1_huffman.py
 ├── README.md
-└── samples/
-    ├── sample_input.txt
-    └── sample_output.txt
 ```
 
 ---
@@ -259,6 +256,7 @@ Original UTF-8 size : 8 bits
 Encoded data size   : 1 bits
 Data-bit saving     : 87.50%
 ```
+
 ---
 
 ## Test Case 6: Full Capability Testing
