@@ -67,11 +67,7 @@ The cell with the lowest `f` value is selected from the open list. The algorithm
 ```text
 problem3_astar/
 ├── problem3_astar.py
-├── README.md
-└── samples/
-    ├── sample_run_1.png
-    ├── sample_run_2.png
-    └── sample_output.txt
+└── README.md
 ```
 
 The actual file names may be changed depending on the structure of the repository.
@@ -289,26 +285,6 @@ def Check_valid_positive_integer(value):
         return False
     else:
         return True
-```
-
----
-
-### Blocked Cell Validation
-
-The `Check_start_dest_blocked()` function checks whether the starting or destination cell is blocked.
-
-```python
-def Check_start_dest_blocked(start, end):
-    if start.blocked:
-        print("start cell is blocked")
-        return True
-
-    elif end.blocked:
-        print("end cell is blocked")
-        return True
-
-    else:
-        return False
 ```
 
 ---
@@ -595,9 +571,7 @@ Enter Destination cell (row col): 2 2
 ### Output
 
 ```text
-Calculating path...
-
-end cell is blocked
+Error: Please enter a coordinate that is not blocked
 ```
 
 ### Result
@@ -606,7 +580,7 @@ end cell is blocked
 PASS
 ```
 
-The program detects that the destination cell is blocked and stops the search.
+The program rejects the blocked destination coordinate and asks for another coordinate.
 
 ---
 
