@@ -2,7 +2,7 @@
 
 ## Overview
 
-For the Heuristic Algorithm category, the A* Search Algorithm was selected because it is able to find the shortest valid path between a selected starting cell and destination cell. The program uses both the actual distance travelled and the estimated distance remaining to guide the search. It accepts a user-created grid, avoids blocked cells, checks valid neighbouring cells, and displays the final path using `X`. The complete path is also printed as a sequence of coordinates so that the result can be checked clearly.
+For the Heuristic Algorithm category, the selected algorithm is A* Search, a pathfinding algorithm that can find a low-cost path efficiently by combining the actual distance travelled with the estimated distance to the destination. The program will accept a grid where 1 represents an open cell and 0 represents a blocked cell, calculate the total cost of each cell, check the neighbouring cell in the eight directions, avoid the cells which are blocked, and reconstruct the final path from the starting cell to the destination.
 
 ---
 
