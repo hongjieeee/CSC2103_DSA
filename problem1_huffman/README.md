@@ -40,7 +40,7 @@ For the greedy algorithm problem, our group had selected Huffman Coding. Huffman
 ```text
 problem1_huffman/
 ├── problem1_huffman.py
-├── README.md
+└── README.md
 ```
 
 ---
