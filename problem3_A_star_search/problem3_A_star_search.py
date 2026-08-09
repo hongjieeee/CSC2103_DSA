@@ -1,34 +1,33 @@
 # attributes of the cells
 class cell:
     def __init__(self, a=0, b=0, blocked=False):
-        self.a = a      #row
-        self.b = b      #column
-        self.pa = -1    #parent row
-        self.pb = -1    #parent column
+        self.a = a  # row
+        self.b = b  # column
+        self.pa = -1  # parent row
+        self.pb = -1  # parent column
 
-        self.g = float('inf')  # distance from start
-        self.h = 0             # heuristic distance to end
-        self.f = float('inf')  # total cost
+        self.g = float("inf")  # distance from start
+        self.h = 0  # heuristic distance to end
+        self.f = float("inf")  # total cost
 
         self.blocked = blocked
 
-    # makes the lowest cost cell in the open list appear first to be chosen
-    def __lt__(self, other):
-        return self.f < other.f
 
 # to find distance to destination cell
 def Heuristic(a, b):
 
-    return ((a.a - b.a)**2 + (a.b - b.b)**2)**0.5
+    return ((a.a - b.a) ** 2 + (a.b - b.b) ** 2) ** 0.5
+
 
 def Check_valid_positive_integer(value):
 
     if value <= 0:
         print("\nvalue cannot be 0 or less\n")
         return False
-    
+
     else:
         return True
+
 
 def Create_path(start_cell, current):
 
@@ -62,9 +61,10 @@ def Create_path(start_cell, current):
 
         row_str = " ".join(row_display)
         print(f"row {r}:  {row_str}")
-    
+
     print("Path:" + " --> ".join(str(p) for p in path))
     return
+
 
 def failed_path(closed_list):
 
@@ -92,12 +92,13 @@ def failed_path(closed_list):
     print("there is no valid path from start to destination")
     return
 
+
 # main function
 def A_star():
 
     start_cell = cells[start[0]][start[1]]
     end_cell = cells[dest[0]][dest[1]]
-            
+
     # initialize lists
     open_list = []
     closed_list = []
@@ -116,12 +117,12 @@ def A_star():
         # find the cell with the lowest 'f' cost
         current = open_list[0]
         current_index = 0
-        
+
         for index, item in enumerate(open_list):
             if item.f < current.f:
                 current = item
                 current_index = index
-                
+
         # Remove it from the open_list
         open_list.pop(current_index)
 
@@ -129,7 +130,7 @@ def A_star():
         if (current.a, current.b) in closed_list:
             continue
 
-        #put the cells that are already used 
+        # put the cells that are already used
         closed_list.append((current.a, current.b))
 
         # if current cell is at destination = end loop
@@ -141,10 +142,16 @@ def A_star():
         # neighbour directions
         directions = [
             # 4 directions
-            (-1,0),(1,0),(0,-1),(0,1)
-
+            (-1, 0),
+            (1, 0),
+            (0, -1),
+            (0, 1)
             # 4 more directions, remove if you want
-            ,(-1,-1),(1,-1),(-1,1),(1,1)
+            ,
+            (-1, -1),
+            (1, -1),
+            (-1, 1),
+            (1, 1),
         ]
 
         # checks every direction from current cell
@@ -166,7 +173,7 @@ def A_star():
             new_g = current.g + Heuristic(current, neighbour)
 
             # changes neighbour into current based on distance from start
-            if (new_g < neighbour.g):
+            if new_g < neighbour.g:
 
                 neighbour.pa = current.a
                 neighbour.pb = current.b
@@ -180,7 +187,7 @@ def A_star():
     # when no more items in open list
     if not open_list:
         failed_path(closed_list)
-        
+
 
 # Program start
 # Get grid dimensions from user
@@ -200,7 +207,9 @@ while True:
         break
 
 # show grid layout (1 for unblocked, 0 for blocked)
-print(f"\nEnter the grid row by row (use spaces between numbers, 1 for open path, 0 for wall).")
+print(
+    f"\nEnter the grid row by row (use spaces between numbers, 1 for open path, 0 for wall)."
+)
 print(f"Example of row: 1 1 0 1 ...")
 
 # Create a list that resembles a grid
@@ -208,10 +217,12 @@ cells = []
 for r in range(rows):
     while True:
         row_input = list(map(int, input(f"Row {r}: ").strip().split()))
-        
+
         if len(row_input) == cols:
             # val == 0 = True, means cell is blocked
-            row_cells = [cell(r, c, blocked=(val == 0)) for c, val in enumerate(row_input)]
+            row_cells = [
+                cell(r, c, blocked=(val == 0)) for c, val in enumerate(row_input)
+            ]
             cells.append(row_cells)
             break
         else:
@@ -242,7 +253,7 @@ while True:
         print(f"\nError: Please enter a valid coordinate")
 
     elif (cells[dest_r][dest_c]).blocked == True:
-            print(f"\nError: Please enter a coordinate that is not blocked")
+        print(f"\nError: Please enter a coordinate that is not blocked")
 
     else:
         dest = [dest_r, dest_c]
@@ -251,4 +262,3 @@ while True:
 # Run the algorithm
 print("\nCalculating path...\n")
 A_star()
-
