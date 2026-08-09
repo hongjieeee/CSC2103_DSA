@@ -1,8 +1,8 @@
-# Problem 3: A* Heuristic Pathfinding
+# Problem 3: A\* Heuristic Pathfinding
 
 ## Overview
 
-For the Heuristic Algorithm category, the A* Search Algorithm was selected because it is able to find the shortest valid path between a selected starting cell and destination cell. The program uses both the actual distance travelled and the estimated distance remaining to guide the search. It accepts a user-created grid, avoids blocked cells, checks valid neighbouring cells, and displays the final path using `X`. The complete path is also printed as a sequence of coordinates so that the result can be checked clearly.
+For the Heuristic Algorithm category, the A\* Search Algorithm was selected because it is able to find the shortest valid path between a selected starting cell and destination cell. The program uses both the actual distance travelled and the estimated distance remaining to guide the search. It accepts a user-created grid, avoids blocked cells, checks valid neighbouring cells, and displays the final path using `X`. The complete path is also printed as a sequence of coordinates so that the result can be checked clearly.
 
 ---
 
@@ -65,8 +65,8 @@ The cell with the lowest `f` value is selected from the open list. The algorithm
 ## Project Files
 
 ```text
-problem3_astar/
-├── problem3_astar.py
+problem3_A_star_search/
+├── problem3_A_star_search.py
 └── README.md
 ```
 
@@ -76,16 +76,16 @@ The actual file names may be changed depending on the structure of the repositor
 
 ## Running the Program
 
-Open a terminal in the `problem3_astar` folder and run:
+Open a terminal in the `problem3_A_star_search` folder and run:
 
 ```bash
-python3 problem3_astar.py
+python3 problem3_A_star_search.py
 ```
 
 For Windows, the following command can also be used:
 
 ```bash
-python problem3_astar.py
+python problem3_A_star_search.py
 ```
 
 The program will first ask for the number of rows and columns. The user must then enter the grid row by row before entering the starting and destination coordinates.
@@ -96,11 +96,11 @@ The program will first ask for the number of rows and columns. The user must the
 
 The program uses the following symbols:
 
-| Symbol | Meaning |
-|---|---|
-| `1` | Open cell that can be used |
-| `0` | Blocked cell or wall |
-| `X` | Cell included in the final path |
+| Symbol               | Meaning                                |
+| -------------------- | -------------------------------------- |
+| `1`                  | Open cell that can be used             |
+| `0`                  | Blocked cell or wall                   |
+| `X`                  | Cell included in the final path        |
 | `X` in failed output | Cell explored before the search failed |
 
 Rows and columns start from `0`.
@@ -116,13 +116,13 @@ Columns: 0 to 4
 
 ## Input and Output Design
 
-| Component | Design |
-|---|---|
-| Input | Number of rows and columns, grid values, starting coordinates, and destination coordinates |
-| Valid data | Positive grid dimensions, grid rows with the correct number of values, and coordinates within the grid |
-| Grid values | `1` for an open cell and `0` for a blocked cell |
-| Main output | `Found!`, a visual grid with the path marked using `X`, and the complete coordinate sequence |
-| Validation | Checks positive dimensions, row length, coordinate boundaries, and blocked start or destination cells |
+| Component      | Design                                                                                                                     |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Input          | Number of rows and columns, grid values, starting coordinates, and destination coordinates                                 |
+| Valid data     | Positive grid dimensions, grid rows with the correct number of values, and coordinates within the grid                     |
+| Grid values    | `1` for an open cell and `0` for a blocked cell                                                                            |
+| Main output    | `Found!`, a visual grid with the path marked using `X`, and the complete coordinate sequence                               |
+| Validation     | Checks positive dimensions, row length, coordinate boundaries, and blocked start or destination cells                      |
 | Error handling | Displays messages for invalid dimensions, incorrect row lengths, blocked cells, invalid coordinates, and unavailable paths |
 
 ---
@@ -212,16 +212,16 @@ class cell:
 
 Each cell stores:
 
-| Attribute | Purpose |
-|---|---|
-| `a` | Row position |
-| `b` | Column position |
-| `pa` | Parent row |
-| `pb` | Parent column |
-| `g` | Actual distance from the starting cell |
-| `h` | Estimated distance to the destination |
-| `f` | Total estimated cost |
-| `blocked` | Shows whether the cell is blocked |
+| Attribute | Purpose                                |
+| --------- | -------------------------------------- |
+| `a`       | Row position                           |
+| `b`       | Column position                        |
+| `pa`      | Parent row                             |
+| `pb`      | Parent column                          |
+| `g`       | Actual distance from the starting cell |
+| `h`       | Estimated distance to the destination  |
+| `f`       | Total estimated cost                   |
+| `blocked` | Shows whether the cell is blocked      |
 
 ### Open List
 
@@ -656,25 +656,25 @@ The program rejects coordinates that are outside the grid boundaries.
 
 ## Strengths
 
-| Strength | Description |
-|---|---|
-| Finds the shortest valid path using A* | The algorithm combines actual and estimated distances to guide the search efficiently. |
-| Supports eight movement directions | The program can move horizontally, vertically, and diagonally. |
-| Avoids blocked cells | Blocked cells are skipped and cannot become part of the path. |
-| Validates important user inputs | The program checks dimensions, coordinates, and blocked starting or destination cells. |
-| Displays the path clearly | The result is shown visually using `X` and as a coordinate sequence. |
+| Strength                                | Description                                                                            |
+| --------------------------------------- | -------------------------------------------------------------------------------------- |
+| Finds the shortest valid path using A\* | The algorithm combines actual and estimated distances to guide the search efficiently. |
+| Supports eight movement directions      | The program can move horizontally, vertically, and diagonally.                         |
+| Avoids blocked cells                    | Blocked cells are skipped and cannot become part of the path.                          |
+| Validates important user inputs         | The program checks dimensions, coordinates, and blocked starting or destination cells. |
+| Displays the path clearly               | The result is shown visually using `X` and as a coordinate sequence.                   |
 
 ---
 
 ## Limitations
 
-| Limitation | Description |
-|---|---|
-| Diagonal corner cutting is possible | The program may move diagonally between blocked side cells. |
-| Regular lists are used | Searching the open and closed lists may become slower for large grids. |
-| Duplicate open-list entries may occur | A neighbour can be added again when a shorter path is discovered. |
-| Grid values are not strictly limited to `0` and `1` | Other numbers may be treated as open cells. |
-| Non-integer input may cause an error | Letters, decimal values, or incomplete coordinate input may raise a `ValueError`. |
+| Limitation                                          | Description                                                                       |
+| --------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Diagonal corner cutting is possible                 | The program may move diagonally between blocked side cells.                       |
+| Regular lists are used                              | Searching the open and closed lists may become slower for large grids.            |
+| Duplicate open-list entries may occur               | A neighbour can be added again when a shorter path is discovered.                 |
+| Grid values are not strictly limited to `0` and `1` | Other numbers may be treated as open cells.                                       |
+| Non-integer input may cause an error                | Letters, decimal values, or incomplete coordinate input may raise a `ValueError`. |
 
 ---
 
@@ -695,6 +695,6 @@ The program rejects coordinates that are outside the grid boundaries.
 
 ## Conclusion
 
-The A* Search Algorithm successfully finds the shortest valid path between a selected starting cell and destination cell. The program calculates movement and heuristic costs, checks neighbouring cells, avoids blocked areas, reconstructs the final path, and displays the result in both visual and coordinate formats.
+The A\* Search Algorithm successfully finds the shortest valid path between a selected starting cell and destination cell. The program calculates movement and heuristic costs, checks neighbouring cells, avoids blocked areas, reconstructs the final path, and displays the result in both visual and coordinate formats.
 
 The implementation demonstrates the use of heuristic search, two-dimensional grids, lists, sets, object attributes, input validation, path reconstruction, and testing with normal and edge cases.

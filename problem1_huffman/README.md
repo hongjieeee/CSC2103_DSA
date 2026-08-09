@@ -228,7 +228,7 @@ Data-bit saving     : 73.08%
 
 ---
 
-## Test Case 5: Just 1 Empty Space (or Empty String)
+## Test Case 5: Single Space Input
 
 ### Input
 
@@ -295,4 +295,21 @@ Validation          : PASS
 Original UTF-8 size : 208 bits
 Encoded data size   : 72 bits
 Data-bit saving     : 65.38%
+```
+
+## Test Case 7: Empty Input
+
+### Input
+
+```text
+==================================================
+HUFFMAN CODING - GREEDY ALGORITHM (Problem 1)
+==================================================
+Enter text to encode:
+```
+
+## Output
+
+```text
+Error: input cannot be empty.
 ```
